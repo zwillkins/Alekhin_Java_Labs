@@ -1,0 +1,8 @@
+ru/inventory/Main.class
+ru/inventory/domain/Trackable.class
+ru/inventory/service/InventoryApp.class
+ru/inventory/domain/Warehouse.class
+ru/inventory/service/FileManager.class
+ru/inventory/domain/PETGSpool.class
+ru/inventory/domain/FilamentSpool.class
+ru/inventory/domain/PLASpool.class
