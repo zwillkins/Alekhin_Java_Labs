@@ -1,4 +1,0 @@
-type;id;color;weight
-PLA;1;rojo;5000
-PETG;2;negro;3400
-PLA;3;blanco;5020
