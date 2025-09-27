@@ -4,6 +4,6 @@ import ru.bmstu.domain.Person;
 
 public interface Dismissable {
     default void dismiss(Person p) {
-        System.out.println("Отчислен: " + p.getFirstName() + " " + p.getSecondName());
+        System.out.println(p.getFirstName() + " " + p.getSecondName());
     }
 }

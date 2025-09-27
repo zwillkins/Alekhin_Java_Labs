@@ -2,8 +2,7 @@ package ru.bmstu.service;
 import ru.bmstu.domain.Person;
 
 public final class PersonPrinter {
-    private PersonPrinter() {
-    }
+    private PersonPrinter() {}
 
     public static void printFI(Person p) {
         System.out.println("Имя: " + p.getFirstName() + ", Фамилия: " + p.getSecondName());
