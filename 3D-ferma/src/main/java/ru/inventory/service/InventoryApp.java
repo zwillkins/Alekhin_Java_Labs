@@ -13,8 +13,8 @@ public class InventoryApp {
     private Warehouse warehouse; 
     private final FileManager fileManager = new FileManager();
     private final Scanner scanner = new Scanner(System.in);
-    private final String JSON_PATH = "warehouse.json";
-    private final String TEXT_PATH = "warehouse.txt";
+    private final String JSON_PATH = "/home/sratik/Alekhin_Java_Labs/3D-ferma/warehouse.json";
+    private final String TEXT_PATH = "/home/sratik/Alekhin_Java_Labs/3D-ferma/warehouse.txt";
 
     public InventoryApp() {
         try {
@@ -48,7 +48,7 @@ public class InventoryApp {
         }
         System.out.println("Программа завершена.");
     }
-
+    
     private void printMenu() {
         System.out.println("\n--- Учет катушек пластика ---");
         System.out.println("1. Добавить новую катушку");
@@ -62,8 +62,8 @@ public class InventoryApp {
 
     private void saveDataMenu() {
         System.out.println("\nВ каком формате сохранить?");
-        System.out.println("1. JSON (рекомендуется)");
-        System.out.println("2. Текстовый файл (.txt)");
+        System.out.println("1. JSON");
+        System.out.println("2. Текстовый файл");
         System.out.println("0. Отмена");
         System.out.print("Ваш выбор: ");
         try {
@@ -82,24 +82,31 @@ public class InventoryApp {
         }
     }
 
-    private void loadDataMenu() {
-        System.out.println("Из какого формата загрузить?");
-        System.out.println("1. Текстовый файл (.txt)");
-        System.out.println("0. Отмена");
-        System.out.print("Ваш выбор: ");
-        try {
-            int choice = Integer.parseInt(scanner.nextLine());
-            if (choice == 1) {
-                this.warehouse = fileManager.loadFromText(TEXT_PATH);
-                System.out.println("Данные успешно загружены из " + TEXT_PATH);
-            }
-        } catch (IOException e) {
-            System.out.println("Ошибка загрузки: " + e.getMessage());
-            this.warehouse = new Warehouse(); 
-        } catch (NumberFormatException e) {
-            System.out.println("Ошибка: введите число.");
+   private void loadDataMenu() {
+    System.out.println("\nВНИМАНИЕ: Все несохраненные изменения в текущей сессии будут потеряны!");
+    System.out.println("Из какого формата загрузить данные?");
+    System.out.println("1. JSON (рекомендуется)");
+    System.out.println("2. Текстовый файл (.txt)");
+    System.out.println("0. Отмена");
+    System.out.print("Ваш выбор: ");
+    try {
+        int choice = Integer.parseInt(scanner.nextLine());
+        
+        if (choice == 1) {
+            this.warehouse = fileManager.loadFromJson(JSON_PATH);
+            System.out.println("Данные успешно загружены из " + JSON_PATH);
+        } else if (choice == 2) {
+            this.warehouse = fileManager.loadFromText(TEXT_PATH);
+            System.out.println("Данные успешно загружены из " + TEXT_PATH);
         }
+        
+    } catch (IOException e) {
+        System.out.println("Ошибка загрузки: " + e.getMessage());
+        this.warehouse = new Warehouse(); 
+    } catch (NumberFormatException e) {
+        System.out.println("Ошибка: введите число.");
     }
+}
     
     private void addNewSpool() {
         try {

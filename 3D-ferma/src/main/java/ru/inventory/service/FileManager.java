@@ -19,8 +19,8 @@ public class FileManager {
     private final ObjectMapper objectMapper;
 
     public FileManager() {
-        objectMapper = new ObjectMapper();
-        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+        this.objectMapper = new ObjectMapper();
+        this.objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
     }
 
     public void saveToJson(Warehouse warehouse, String filePath) throws IOException {
@@ -48,6 +48,7 @@ public class FileManager {
     public Warehouse loadFromText(String filePath) throws IOException {
         Warehouse warehouse = new Warehouse();
         File file = new File(filePath);
+
         if (!file.exists() || Files.readAllLines(Paths.get(filePath)).size() <= 1) {
             return warehouse;
         }
@@ -58,14 +59,14 @@ public class FileManager {
             if (parts.length < 4) continue; 
 
             String type = parts[0];
-            long id = Long.parseLong(parts[1]);
+            long id = Long.parseLong(parts[1]); 
             String color = parts[2];
             int weight = Integer.parseInt(parts[3]);
 
             if ("PLA".equals(type)) {
-                warehouse.addSpool(new PLASpool(id, color, weight, 210));
+                warehouse.addSpool(new PLASpool(id, color, weight, 210)); 
             } else if ("PETG".equals(type)) {
-                warehouse.addSpool(new PETGSpool(id, color, weight, true));
+                warehouse.addSpool(new PETGSpool(id, color, weight, true)); 
             }
         }
         return warehouse;
