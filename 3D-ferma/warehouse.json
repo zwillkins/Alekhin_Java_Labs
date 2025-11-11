@@ -1,0 +1,28 @@
+{
+  "spools" : [ {
+    "type" : "PLA",
+    "id" : 1,
+    "color" : "roja",
+    "weight" : 3000,
+    "printTemperature" : 210
+  }, {
+    "type" : "PLA",
+    "id" : 3,
+    "color" : "blanco",
+    "weight" : 1200,
+    "printTemperature" : 210
+  }, {
+    "type" : "PETG",
+    "id" : 2,
+    "color" : "negro",
+    "weight" : 2000,
+    "isFoodSafe" : true,
+    "foodSafe" : true
+  }, {
+    "type" : "PLA",
+    "id" : 5,
+    "color" : "рр",
+    "weight" : 2000,
+    "printTemperature" : 210
+  } ]
+}

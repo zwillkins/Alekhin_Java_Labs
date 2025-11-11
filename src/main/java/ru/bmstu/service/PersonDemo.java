@@ -1,16 +1,15 @@
 package ru.bmstu.service;
 
+import java.util.List;
+
 import ru.bmstu.domain.Person;
 import ru.bmstu.domain.Student;
 import ru.bmstu.exception.InvalidPhoneNumberException;
-
-import java.util.List;
 
 public class PersonDemo {
 
 
     public void demonstrateExceptions() {
-        System.out.println("\n=== Демонстрация обработки исключений ===");
         Person person = new Person("Иван", "Иванов", 30);
         
         try {
@@ -20,18 +19,16 @@ public class PersonDemo {
             System.out.println("  Произошла ошибка: " + e.getMessage());
         }
 
-        System.out.println("\n  Попытка установить номер с буквами...");
         try {
-            person.setPhone("не номер телефона");
+            person.setPhone("+7-телефон");
         } catch (InvalidPhoneNumberException e) {
-            System.out.println("    Успешно поймано исключение: " + e.getMessage());
+            System.out.println("Успешно поймано исключение: " + e.getMessage());
         }
 
-        System.out.println("  Попытка установить слишком короткий номер...");
         try {
-            person.setPhone("123");
+            person.setPhone("+123");
         } catch (InvalidPhoneNumberException e) {
-            System.out.println("    Успешно поймано исключение: " + e.getMessage());
+            System.out.println("Успешно поймано исключение: " + e.getMessage());
         }
     }
 

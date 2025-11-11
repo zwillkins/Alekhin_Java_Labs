@@ -1,0 +1,25 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5433/printer_farm
+    username: myuser
+    password: mypassword
+  
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.xml
+    
+  # Оставляем только базовые настройки Kafka
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: printer-farm-group

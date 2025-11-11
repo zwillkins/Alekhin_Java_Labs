@@ -19,9 +19,10 @@ public class InventoryApp {
     public InventoryApp() {
         try {
             this.warehouse = fileManager.loadFromJson(JSON_PATH);
-            System.out.println("Данные склада загружены по умолчанию из " + JSON_PATH);
+            System.out.println("Данные загружены из " + JSON_PATH);
         } catch (IOException e) {
-            System.out.println("Файл " + JSON_PATH + " не найден. Создан новый пустой склад.");
+            System.out.println("Файл " + JSON_PATH + " не найден."
+            );
             this.warehouse = new Warehouse();
         }
     }
@@ -50,12 +51,11 @@ public class InventoryApp {
     }
     
     private void printMenu() {
-        System.out.println("\n--- Учет катушек пластика ---");
         System.out.println("1. Добавить новую катушку");
         System.out.println("2. Списать пластик");
         System.out.println("3. Показать инвентарь");
-        System.out.println("4. Сохранить данные в файл");
-        System.out.println("5. Загрузить данные из файла"); 
+        System.out.println("4. Сохранить");
+        System.out.println("5. Загрузить"); 
         System.out.println("0. Выйти");                     
         System.out.print("Ваш выбор: ");
     }
@@ -83,10 +83,9 @@ public class InventoryApp {
     }
 
    private void loadDataMenu() {
-    System.out.println("\nВНИМАНИЕ: Все несохраненные изменения в текущей сессии будут потеряны!");
     System.out.println("Из какого формата загрузить данные?");
-    System.out.println("1. JSON (рекомендуется)");
-    System.out.println("2. Текстовый файл (.txt)");
+    System.out.println("1. JSON");
+    System.out.println("2. Текстовый файл");
     System.out.println("0. Отмена");
     System.out.print("Ваш выбор: ");
     try {

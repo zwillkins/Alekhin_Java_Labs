@@ -14,13 +14,9 @@ public class Task3 {
 
         double totalCost = orders.stream()
             .filter(order -> order.getOrderDate().isAfter(LocalDate.now().minusMonths(1)))
-            
             .filter(order -> order.getItems().stream().anyMatch(item -> "одежда".equals(item.getCategory())))
-
             .mapToDouble(order -> order.getItems().stream().mapToDouble(Item::getPrice).sum())
-
             .sum();
-
         System.out.printf("Общая стоимость заказов с одеждой за последний месяц: %.2f\n", totalCost);
     }
 

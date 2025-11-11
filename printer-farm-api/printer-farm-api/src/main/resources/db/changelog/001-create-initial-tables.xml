@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+
+    <changeSet id="1" author="sratik">
+
+        <createTable tableName="customer_orders">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="customer_name" type="VARCHAR(255)"/>
+            <column name="due_date" type="DATE"/>
+            <column name="status" type="VARCHAR(50)"/>
+            <column name="created_at" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP"/>
+        </createTable>
+
+
+        <createTable tableName="print_tasks">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="part_name" type="VARCHAR(255)"/>
+            <column name="required_weight" type="INT"/>
+            <column name="required_time" type="INT"/>
+            <column name="required_quantity" type="INT"/>
+            <column name="printed_quantity" type="INT" defaultValue="0"/>
+            <column name="gcode_file_name" type="VARCHAR(255)"/>
+            <column name="status" type="VARCHAR(50)"/>
+            <column name="priority" type="INT"/>
+            <column name="order_id" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="fk_task_to_order" references="customer_orders(id)"/>
+            </column>
+        </createTable>
+
+
+        <createTable tableName="print_operations">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="start_time" type="TIMESTAMP"/>
+            <column name="end_time" type="TIMESTAMP"/>
+            <column name="final_status" type="VARCHAR(50)"/>
+            <column name="actual_weight_consumed" type="INT"/>
+            <column name="task_id" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="fk_operation_to_task" references="print_tasks(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

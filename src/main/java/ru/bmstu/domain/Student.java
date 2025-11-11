@@ -7,7 +7,6 @@ import java.util.TreeSet;
 public class Student extends Person {
     private String group;
     private int course;
-    
     private final SortedSet<Subject> subjects = new TreeSet<>(Comparator.comparing(Subject::getName).reversed());
 
     public Student(String firstName, String secondName, int age, String group, int course) {
@@ -25,9 +24,6 @@ public class Student extends Person {
     }
     
     public double getAverageGrade() {
-        if (subjects.isEmpty()) {
-            return 0.0;
-        }
         return subjects.stream()
                        .mapToInt(Subject::getGrade)
                        .average()
