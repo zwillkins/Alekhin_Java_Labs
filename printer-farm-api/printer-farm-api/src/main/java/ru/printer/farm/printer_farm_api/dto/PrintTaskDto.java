@@ -10,5 +10,5 @@ public class PrintTaskDto {
     private Integer printedQuantity;
     private String status;
     private Integer priority;
-    private Long orderId; // Просто ID заказа, а не весь объект
+    private Long orderId; 
 }

@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable; // <-- Новый импорт
+import org.springframework.web.bind.annotation.PathVariable; 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,7 +26,6 @@ import ru.printer.farm.printer_farm_api.service.PrintOperationService;
 public class PrintOperationController {
     private final PrintOperationService operationService;
 
-    // ... GET, PUT, DELETE остаются без изменений ...
     @GetMapping
     public List<PrintOperation> getAllOperations() { return operationService.findAll(); }
     
@@ -36,24 +35,21 @@ public class PrintOperationController {
         return operation != null ? ResponseEntity.ok(operation) : ResponseEntity.notFound().build();
     }
 
-    // --- ИСПРАВЛЕННЫЙ МЕТОД POST ---
     @PostMapping
     public ResponseEntity<PrintOperation> createOperation(@RequestBody CreatePrintOperationRequest requestDto, @RequestParam Long taskId) {
-        // Создаем сущность и переносим данные из DTO
         PrintOperation operation = new PrintOperation();
         operation.setStartTime(requestDto.getStartTime());
         operation.setEndTime(requestDto.getEndTime());
         operation.setFinalStatus(requestDto.getFinalStatus());
         operation.setActualWeightConsumed(requestDto.getActualWeightConsumed());
 
-        // Вызываем сервис для сохранения с привязкой к Task
         PrintOperation createdOperation = operationService.saveWithTaskId(operation, taskId);
         if (createdOperation == null) {
             return ResponseEntity.badRequest().build();
         }
         return ResponseEntity.ok(createdOperation);
     }
-    // ---------------------------------
+
     
     @PutMapping("/{id}")
     public ResponseEntity<PrintOperation> updateOperation(@PathVariable Long id, @RequestBody PrintOperation operationDetails) {

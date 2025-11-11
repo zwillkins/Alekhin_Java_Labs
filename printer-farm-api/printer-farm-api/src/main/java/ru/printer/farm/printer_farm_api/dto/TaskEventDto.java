@@ -1,4 +1,3 @@
-// Убрали все импорты и аннотации Lombok
 package ru.printer.farm.printer_farm_api.dto;
 import lombok.Data; 
 
@@ -8,18 +7,15 @@ public class TaskEventDto {
     private String partName;
     private String status;
 
-    // 1. Конструктор без аргументов (обязателен для Jackson)
     public TaskEventDto() {
     }
 
-    // 2. Конструктор со всеми полями
     public TaskEventDto(Long taskId, String partName, String status) {
         this.taskId = taskId;
         this.partName = partName;
         this.status = status;
     }
 
-    // 3. Геттеры и Сеттеры, написанные вручную
     public Long getTaskId() {
         return taskId;
     }

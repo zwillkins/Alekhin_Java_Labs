@@ -1,11 +1,11 @@
 package ru.printer.farm.printer_farm_api.dto;
 
-import lombok.Data;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-// Этот класс используется для передачи данных через API. Он не привязан к базе данных.
+import lombok.Data;
+
 @Data
 public class CustomerOrderDto {
     private Long id;
@@ -13,5 +13,5 @@ public class CustomerOrderDto {
     private LocalDate dueDate;
     private String status;
     private LocalDateTime createdAt;
-    private List<PrintTaskDto> tasks; // Используем DTO для вложенных объектов
+    private List<PrintTaskDto> tasks; 
 }

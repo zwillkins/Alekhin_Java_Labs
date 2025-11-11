@@ -18,7 +18,6 @@ spring:
   liquibase:
     change-log: classpath:db/changelog/db.changelog-master.xml
     
-  # Оставляем только базовые настройки Kafka
   kafka:
     bootstrap-servers: localhost:9092
     consumer:

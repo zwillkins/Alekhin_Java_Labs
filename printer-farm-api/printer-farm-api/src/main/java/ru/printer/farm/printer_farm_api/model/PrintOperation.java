@@ -29,6 +29,6 @@ public class PrintOperation {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "task_id")
-    @JsonBackReference 
+    @JsonBackReference  
     private PrintTask task;
 }

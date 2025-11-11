@@ -25,14 +25,13 @@ public class KafkaConfig {
     @Value("${spring.kafka.consumer.group-id}")
     private String groupId;
 
-    // --- Конфигурация для PRODUCER (Отправителя) ---
+
     @Bean
     public ProducerFactory<String, TaskEventDto> producerFactory() {
         Map<String, Object> configProps = new HashMap<>();
         configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         configProps.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
-        // Не добавлять заголовки с типом в сообщение
         configProps.put(JsonSerializer.ADD_TYPE_INFO_HEADERS, false);
         return new DefaultKafkaProducerFactory<>(configProps);
     }
@@ -42,7 +41,6 @@ public class KafkaConfig {
         return new KafkaTemplate<>(producerFactory());
     }
 
-    // --- Конфигурация для CONSUMER (Получателя) ---
     @Bean
     public ConsumerFactory<String, TaskEventDto> consumerFactory() {
         Map<String, Object> props = new HashMap<>();

@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable; // <-- Новый импорт
+import org.springframework.web.bind.annotation.PathVariable; 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,7 +26,6 @@ import ru.printer.farm.printer_farm_api.service.PrintTaskService;
 public class PrintTaskController {
     private final PrintTaskService taskService;
 
-    // ... GET, PUT, DELETE остаются без изменений ...
     @GetMapping
     public List<PrintTask> getAllTasks() { return taskService.findAll(); }
     
@@ -36,10 +35,8 @@ public class PrintTaskController {
         return task != null ? ResponseEntity.ok(task) : ResponseEntity.notFound().build();
     }
     
-    // --- ИСПРАВЛЕННЫЙ МЕТОД POST ---
     @PostMapping
     public ResponseEntity<PrintTask> createTask(@RequestBody CreatePrintTaskRequest requestDto, @RequestParam Long orderId) {
-        // Создаем пустую сущность и переносим в нее данные из DTO
         PrintTask task = new PrintTask();
         task.setPartName(requestDto.getPartName());
         task.setRequiredWeight(requestDto.getRequiredWeight());
@@ -49,14 +46,12 @@ public class PrintTaskController {
         task.setStatus(requestDto.getStatus());
         task.setPriority(requestDto.getPriority());
 
-        // Вызываем сервис для сохранения с привязкой к Order
         PrintTask createdTask = taskService.saveWithOrderId(task, orderId);
         if (createdTask == null) {
             return ResponseEntity.badRequest().build();
         }
         return ResponseEntity.ok(createdTask);
     }
-    // ---------------------------------
     
     @PutMapping("/{id}")
     public ResponseEntity<PrintTask> updateTask(@PathVariable Long id, @RequestBody PrintTask taskDetails) {

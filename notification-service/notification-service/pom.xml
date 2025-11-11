@@ -26,11 +26,10 @@
             <artifactId>spring-kafka</artifactId>
         </dependency>
 
-        <!-- ИЗМЕНЕНИЕ: УБРАЛИ <optional>true</optional> -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <scope>provided</scope> <!-- 'provided' - лучший scope для Lombok -->
+            <scope>provided</scope> 
         </dependency>
         
         <dependency>
@@ -50,7 +49,6 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <!-- Конфигурация excludes для Lombok здесь не нужна, так как scope 'provided' решает эту проблему -->
             </plugin>
         </plugins>
     </build>

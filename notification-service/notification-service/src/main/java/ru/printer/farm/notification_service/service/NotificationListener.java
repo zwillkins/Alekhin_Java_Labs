@@ -12,15 +12,13 @@ public class NotificationListener {
 
     private final KafkaTemplate<String, TaskEventDto> kafkaTemplate;
 
-    // Внедряем KafkaTemplate через конструктор
     public NotificationListener(KafkaTemplate<String, TaskEventDto> kafkaTemplate) {
         this.kafkaTemplate = kafkaTemplate;
     }
 
-    // Этот метод "слушает" топик с запросами на создание заданий
+
     @KafkaListener(topics = "task-creation-requests", groupId = "notification-group")
     public void handleTaskCreation(TaskEventDto event) {
-        // --- ИСПОЛЬЗУЕМ ЦВЕТА ---
         System.out.println(
             ConsoleColors.YELLOW + "<<< KAFKA CONSUMER (Notifier): Получено событие для задания ID " + event.getTaskId() +
             " ('" + event.getPartName() + "')." + ConsoleColors.RESET
@@ -40,6 +38,5 @@ public class NotificationListener {
             ConsoleColors.GREEN + ">>> KAFKA PRODUCER (Notifier): Отправлен ответ для задания ID " + event.getTaskId() +
             ". Новый статус '" + event.getStatus() + "'." + ConsoleColors.RESET
         );
-        // -----------------------
     }
 }
